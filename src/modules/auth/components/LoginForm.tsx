@@ -21,9 +21,9 @@ export default function LoginForm() {
   const methods = useForm({
     resolver: yupResolver(loginvalidation),
   });
-  const { formState: { errors } } = useForm({
-    resolver: yupResolver(loginvalidation),
-  })
+  // const { formState: { errors } } = useForm({
+  //   resolver: yupResolver(loginvalidation),
+  // })
   const onSubmit = (data: any) => {
     console.log(data);
 
@@ -43,7 +43,6 @@ export default function LoginForm() {
             <form className="container_body--form flex flex-col w-[452px]" onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="ip-email my-[10px] h-[45px] rounded w-full p-[7px] border-solid border-gray-400 border-2 focus:border-sky-600 focus:outline-none ">
                 <InputField name="email" />
-                {errors?.email && errors.email.message}
               </div>
               <div className="ip-pass my-[10px] h-[45px] rounded w-full p-[7px] border-solid border-gray-400 border-2 focus:border-sky-600 focus:outline-none">
                 <PasswordField name="password" />
