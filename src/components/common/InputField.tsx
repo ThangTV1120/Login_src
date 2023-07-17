@@ -11,18 +11,18 @@ interface InputFieldProps<T> {
     onChange?: (value: T) => void;
 }
 const InputField = <T,>(props: InputFieldProps<T>) => {
-    const { register,formState: { errors } } = useFormContext()
-    let {name} =props;
+    const { register, formState: { errors } } = useFormContext()
+    let { name } = props;
     // console.log(name)
     console.log(errors?.[props.name]?.message);
 
     return (
         <>
             <TextField {...register(props.name)} placeholder=" " ></TextField>
-            {errors?.[props.name] && errors?.[props.name]?.message }
-            {/* <div className="mb-1 text-red-500">
-                {errors?.name && errors.name.message}
-            </div> */}
+            {/* {errors?.[props.name] && errors?.[props.name]?.message } */}
+            <div className="mb-1 text-red-500">
+                {errors?.[props.name] && errors?.[props.name]?.message}
+            </div>
         </>
 
 
