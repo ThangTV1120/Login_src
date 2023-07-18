@@ -7,18 +7,28 @@ import {
     PathValue,
 } from "react-hook-form";
 interface PasswordFieldProps<T> {
-    [x: string]: any;
-    // name: Path<T>;
-    onChange?: (value: T) => void;
+    // [x: string]: any;
+    name: Path<T>;
+    label:Path<T>;
+    type?:Path<T>;
 }
 const PasswordField = <T,>(props: PasswordFieldProps<T>) => {
     const { register, formState: { errors } } = useFormContext()
     return (
         <>
-            <TextField {...register(props.name)} placeholder=" " type='password' ></TextField>
-            <div className="mb-1 text-red-500">
-                {errors?.[props.name] && errors?.[props.name]?.message}
-            </div>
+            <TextField
+                {...register(props.name)}
+                fullWidth
+                placeholder=" "
+                label={props.label}
+                type={props.type ? props.type : "text"}
+                error={!!errors?.[props.name]}
+                helperText={errors?.[props.name] && errors?.[props.name]?.message?.toString()}
+            >
+            </TextField>
+            {/* <div className="mb-1 text-red-500">
+                {errors?.[props.name] && errors?.[props.name]?.message?.toString()}
+            </div> */}
         </>
 
     )

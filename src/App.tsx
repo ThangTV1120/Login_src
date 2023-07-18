@@ -9,6 +9,10 @@ function App() {
   return (
     <>
       <LoginForm></LoginForm>
+      {/* <div className="text-center flex flex-col">
+        <div>asdf</div>
+        <div>dddd</div>
+      </div> */}
     </>
   )
 }

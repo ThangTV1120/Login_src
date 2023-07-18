@@ -6,23 +6,31 @@ import {
     Path,
     PathValue,
 } from "react-hook-form";
-interface InputFieldProps<T> {
+interface InputFieldProps<T extends FieldValues> {
     name: Path<T>;
     onChange?: (value: T) => void;
+    label:Path<T>;
 }
-const InputField = <T,>(props: InputFieldProps<T>) => {
-    const { register, formState: { errors } } = useFormContext()
-    let { name } = props;
+const InputField = <T extends FieldValues,>(props: InputFieldProps<T>) => {
+    const { register, formState: { errors } } = useFormContext<T>()
+    // let { name } = props;
     // console.log(name)
-    console.log(errors?.[props.name]?.message);
+    // console.log(errors?.[props.name]?.message);
 
     return (
         <>
-            <TextField {...register(props.name)} placeholder=" " ></TextField>
+            <TextField
+                {...register(props.name)}
+                fullWidth
+                label={props.label}
+                placeholder=" " error={!!errors?.[props.name]}
+                helperText={errors?.[props.name] && errors?.[props.name]?.message?.toString()}
+            >
+            </TextField>
             {/* {errors?.[props.name] && errors?.[props.name]?.message } */}
-            <div className="mb-1 text-red-500">
+            {/* <div className="mb-1 text-red-500">
                 {errors?.[props.name] && errors?.[props.name]?.message}
-            </div>
+            </div> */}
         </>
 
 

@@ -1,0 +1,14 @@
+{
+    "user": [
+        {
+            "email": "thangtv2709@gmail.com",
+            "password": "1234567",
+            "token":"fasdfsadf"
+        },
+        {
+            "email": "thangtv@gmail.com",
+            "password": "123456",
+            "token":"1345"
+        }
+    ]
+}
