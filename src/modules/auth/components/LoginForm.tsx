@@ -28,15 +28,18 @@ export default function LoginForm() {
   const { reset } = methods;
   const onSubmit = async (data: FormData) => {
 
-    let resss = await LoginPage(data);
-    if (!resss) {
-      restData();
+    const resss = await LoginPage(data);
+    // reset();
+    console.log(resss)
+    if (resss) {
+      // restData();
+      reset();
     }
   }
   const restData = () => {
     let dataaa: FormData = {
       email: "",
-      password: ""
+      password: "",
     }
     reset(dataaa);
   }
@@ -63,7 +66,7 @@ export default function LoginForm() {
 
               <div className='form-password relative'>
                 <div className='ip-pass mb-3 rounded w-full border-solid focus:border-sky-600 focus:outline-none'>
-                  <PasswordField name="password" label="Password *" type="password" />
+                  <PasswordField name="password" label="Password *" type='password'/>
                 </div>
                 {/* <span className="placeholder absolute pointer-events-none top-[5%] left-[15px] translate-y-[50%] text-slate-500 select-none">Password *</span> */}
               </div>

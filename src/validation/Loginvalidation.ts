@@ -12,7 +12,7 @@ const loginvalidation= yup.object().shape({
     .matches(
       /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@gmail\.com$/,
       "Invalid email format"
-    ) as yup.StringSchema<string>,
+    ),
   password: yup
     .string()
     .required("Please enter password")
