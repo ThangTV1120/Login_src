@@ -2,7 +2,7 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-import LoginForm from './modules/auth/components/LoginForm'
+import {LoginForm} from './modules/auth/components/LoginForm'
 
 function App() {
 

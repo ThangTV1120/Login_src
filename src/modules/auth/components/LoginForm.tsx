@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useForm, FormProvider, Resolver } from "react-hook-form"
+import { useForm, FormProvider, Resolver,SubmitHandler } from "react-hook-form"
 import InputField from '../../../components/common/InputField'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,13 +9,21 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 // import getALL from "../../../services/userAPI"
-import LoginPage from '../pages/LoginPage';
-export default function LoginForm() {
-  interface FormData {
-    email: string;
-    password: string;
-  }
-  let [isrest, setisrest] = useState(true);
+import { LoginCheck, LoginUser } from '../pages/LoginPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/reducers/rootReducers';
+import { LoginRedux } from "../../../redux/action/userAction";
+import { useAppDispatch,useAppSelector } from '../../../redux';
+import {USER_LOGIN} from "../../../redux/reducers/user.slice"
+export interface FormData {
+  email: string;
+  password: string;
+}
+export function LoginForm() {
+
+  // const dispatch = useDispatch();
+  // const data = useSelector((state: RootState) => state.user.token);
+  // console.log(data);
   // const { register,
   //   handleSubmit,
   //   watch,
@@ -26,15 +34,31 @@ export default function LoginForm() {
     resolver: yupResolver(loginvalidation),
   });
   const { reset } = methods;
+  // const onSubmit :SubmitHandler<FormData> = async (data: FormData)
+  const dispatch = useAppDispatch();
   const onSubmit = async (data: FormData) => {
-
-    const resss = await LoginPage(data);
-    // reset();
-    console.log(resss)
-    if (resss) {
-      // restData();
-      reset();
+   
+    let u= await LoginUser(data);
+    console.log(u);
+    if(u){
+      dispatch(USER_LOGIN({token:u.data.access_token,user:u.data.user}));
     }
+ 
+    // console.log(u)
+    // console.log(data)
+    // console.log(resss)  
+    // if(resss)
+    //   dispatch(USER_LOGIN(data))
+    // reset();
+    // console.log(resss)
+    // if (resss) {
+    //   reset();
+    // }
+    // console.log(data.email);
+    // LoginUser(data);
+    // let token="fasfadfasdf222";
+    // dispatch(LoginRedux(data));
+
   }
   const restData = () => {
     let dataaa: FormData = {
@@ -66,7 +90,7 @@ export default function LoginForm() {
 
               <div className='form-password relative'>
                 <div className='ip-pass mb-3 rounded w-full border-solid focus:border-sky-600 focus:outline-none'>
-                  <PasswordField name="password" label="Password *" type='password'/>
+                  <PasswordField name="password" label="Password *" type='password' />
                 </div>
                 {/* <span className="placeholder absolute pointer-events-none top-[5%] left-[15px] translate-y-[50%] text-slate-500 select-none">Password *</span> */}
               </div>
